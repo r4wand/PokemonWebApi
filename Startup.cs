@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PokemonWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PokemonWebApi
 {
@@ -27,6 +29,7 @@ namespace PokemonWebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<PokedexContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
